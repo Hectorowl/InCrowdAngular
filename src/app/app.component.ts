@@ -8,3 +8,30 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'IncrowdAngular';
 }
+
+export class Usuario{
+  nombre: string;
+  username: string;
+  password: string;
+  correo: string;
+  valoracion: number;
+  numEventosCreados: number;
+  numEventosParticipa: number;
+}
+
+export class Evento{
+  nombre: string;
+  descripcion: string;
+  fecha: string;
+  hora: string;
+  esPublico: boolean;
+  aforo: number;
+  categoria: string;
+  organizador: string;
+}
+
+export class Mensaje{
+  autor: string;
+  evento: string;
+  texto: string;
+}
