@@ -35,3 +35,7 @@ export class Mensaje{
   evento: string;
   texto: string;
 }
+export const GlobalVariable = Object.freeze({
+  BASE_API_URL: 'http://example.com/',
+
+});
