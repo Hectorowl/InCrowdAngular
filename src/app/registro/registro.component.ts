@@ -10,6 +10,7 @@ import {GlobalVariable, Usuario} from "../app.component";
 })
 export class RegistroComponent implements OnInit {
 
+  name : string;
   user : string;
   password : string;
   email : string;
@@ -19,11 +20,13 @@ export class RegistroComponent implements OnInit {
   showSuccess : boolean;
   showPassError : boolean;
   showReqError : boolean;
+  showRegexpError : boolean;
 
   constructor( private http: HttpClient, private router: Router) { }
 
 
   ngOnInit(): void {
+    this.name = '';
     this.user = '';
     this.password = '';
     this.email = '';
@@ -33,33 +36,44 @@ export class RegistroComponent implements OnInit {
     this.showSuccess = false;
     this.showPassError = false;
     this.showReqError = false;
+    this.showRegexpError = false;
   }
 
   registrar() {
     this.clean();
     if(this.valid()) {
       const newUser = { // Objeto usuario en registro
+        nombre: this.name,
         username: this.user,
-        email: this.email,
+        correo: this.email,
         password: this.password,
-        repepassword: this.repepassword
+        valoracion: null,
+        numEventosCreados: 0,
+        numValoraciones: 0,
+        numEventosParticipa: 0
       };
 
-      this.http.post(GlobalVariable.BASE_API_URL + '/TODO', newUser).subscribe(
+      this.http.post('http://localhost:4200/api' + '/CreateUsuario/', newUser).subscribe(
         (resp: any) => { // comprobar estado: 201 recurso creado, 409 error por repetición de user
           console.log(resp);
-          this.showSuccess = true;
-          setTimeout(() => {
-            this.router.navigate(['login']);
-          }, 3000);
+          console.log(resp.success);
+          if(resp.success==true){
+            this.showSuccess = true;
+            setTimeout(() => {
+              this.router.navigate(['login']);
+            }, 3000);
+          }else{
+            if(resp.message=="Username ya existe"){
+              this.showAlreadyExists = true;
+            }
+            else{
+              this.showOtherError = true;
+            }
+          }
+
         },
         (error: HttpErrorResponse) => {
-          if (error.error == "Ya existe") {
-            this.showAlreadyExists = true;
-          }
-          if (error.error == "Algo ha ido mal") {
-            this.showOtherError = true;
-          }
+          console.log(error)
         });
     }
   }
@@ -78,8 +92,13 @@ export class RegistroComponent implements OnInit {
       this.showPassError=true;
       return false;
     }
-    if(this.password=='' || this.repepassword=='' || this.user==''){
+    if(this.password=='' || this.repepassword=='' || this.user=='' || this.name==''){
       this.showReqError=true;
+      return false;
+    }
+    const nameRegexp: RegExp = /[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (!nameRegexp.test(this.password)){
+      this.showRegexpError=true;
       return false;
     }
     return true;

@@ -1,5 +1,17 @@
 <div class="container-fluid form-group" style="width: max-content">
   <div class="row justify-content-center" style="margin-top: 20%">
+    <img class="img-responsive" ngSrc="assets/logosinbg.png" height="175" width="181" alt="image">
+  </div>
+  <div class="row justify-content-center" style="margin-top: 20%">
+    <div class="col-4">
+    </div>
+    <div class="col-md-auto">
+      <label class="input-group-label">Nombre<span style="color: crimson">*</span>
+        <br>
+        <input class="form-control" type="text" placeholder="Nombre" name="name" [(ngModel)]="name"  required></label>
+    </div>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-4">
     </div>
     <div class="col-md-auto">
@@ -26,11 +38,14 @@
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-4">
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-auto text-wrap">
       <label class="input-group-label">Contraseña <span style="color: crimson">*</span>
         <br>
-        <input class="form-control"type="password" placeholder="Contraseña" name="pass" [(ngModel)]="password" required>
+        <input class="form-control" type="password" placeholder="Contraseña" name="pass" [(ngModel)]="password" required>
       </label>
+      <span  *ngIf="showRegexpError" style="color: crimson" >
+        <br> <p>La contraseña debe contener un</p><p>carácter especial o número
+      </span>
     </div>
   </div>
   <div class="row justify-content-center" style="margin-top: 7%">
@@ -43,7 +58,7 @@
   </div>
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
-      <button class="btn btn-secondary" type="submit" id="registBut" (click)="registrar()"> Registrarse </button>
+      <button class="btn btn-secondary" style="background-color: #2D074A" type="submit" id="registBut" (click)="registrar()"> Registrarse </button>
     </div>
   </div>
   <div *ngIf="showSuccess" class="row justify-content-center" style="margin-top: 7%">

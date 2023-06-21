@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://incrowds.onrender.com/incrown_app",
+    "secure": false,
+    "cookieDomainRewrite": "localhost",
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : ""}
+  },
+  "logLevel": "debug"
+}

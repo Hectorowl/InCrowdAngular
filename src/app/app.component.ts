@@ -36,6 +36,6 @@ export class Mensaje{
   texto: string;
 }
 export const GlobalVariable = Object.freeze({
-  BASE_API_URL: 'http://example.com/',
+  BASE_API_URL: 'https://incrowds.onrender.com/incrown_app/',
 
 });

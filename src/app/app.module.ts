@@ -9,6 +9,7 @@ import {RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     RouterOutlet,
     HttpClientModule,
+    NgOptimizedImage,
 
   ],
   providers: [],
