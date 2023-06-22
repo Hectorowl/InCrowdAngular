@@ -71,6 +71,7 @@ export class RegistroComponent implements OnInit {
 
         },
         (error: HttpErrorResponse) => {
+          this.showOtherError = true;
           console.log(error)
         });
     }

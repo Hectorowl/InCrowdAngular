@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
+        this.showOtherError = true;
         console.log(error)
       });
 
@@ -110,6 +111,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
+        this.showModalError = true;
         console.log(error)
       });
 
