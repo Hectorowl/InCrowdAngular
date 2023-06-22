@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       password: this.password,
     };
 
-    this.http.post(GlobalVariable.BASE_API_URL + '/login', userData,{withCredentials: true} ).subscribe(
+    this.http.get('http://localhost:4200/api' + '/Login/'+this.user+'/'+this.password).subscribe(
       (resp: any) => {
         console.log('resp');
         console.log(resp);
