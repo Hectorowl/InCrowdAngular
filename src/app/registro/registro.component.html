@@ -90,26 +90,3 @@
     </div>
   </div>
 </div>
-
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">¿Actualizar contrasña?</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <p style="text-align: center;margin-top: 7%">¿Generar contraseña automática?</p>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="sendEmail()">Si</button>
-    <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
-  </div>
-</ng-template>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-
-<hr />

@@ -31,14 +31,64 @@
   </div>
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
-      <button class="btn btn-secondary" type="submit" id="registBut" (click)="login()"> Login </button>
+      <button class="btn btn-secondary" style="background-color: #2D074A" type="submit" id="registBut" (click)="login()"> Login </button>
+    </div>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+      <a style="color: blue;text-underline: blue" (click)="open(content)">He olvidado mi contraseña</a>
     </div>
   </div>
   <div *ngIf="showSuccess" class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
         <span style="color: green">
-          Logeado con éxito.
+          Logeado con éxito
+        </span>
+    </div>
+  </div>
+  <div *ngIf="showOtherError" class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+        <span style="color: crimson">
+          Error al hacer login
         </span>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">¿Actualizar contraseña?</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <p style="text-align: center;margin-top: 7%">Introduzca su correo y se le enviará una nueva contraseña</p>
+      </div>
+      <div class="row justify-content-center" style="margin-top: 7%">
+        <div class="col-md-auto">
+            <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="this.email">
+        </div>
+      </div>
+    </form>
+    <div *ngIf="showModalSuccess" class="row justify-content-center" style="margin-top: 2%">
+      <div class="col-md-auto">
+        <span style="color: green">
+          Correo enviado con éxito
+        </span>
+      </div>
+    </div>
+    <div *ngIf="showModalError" class="row justify-content-center" style="margin-top: 2%">
+      <div class="col-md-auto">
+        <span style="color: crimson">
+          Correo no encontrado
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="sendEmail()">Enviar</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Salir</button>
+  </div>
+</ng-template>
+

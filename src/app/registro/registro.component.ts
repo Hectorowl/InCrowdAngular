@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Router} from "@angular/router";
-import {GlobalVariable, Usuario} from "../app.component";
-import {NgbPaginationModule, NgbAlertModule, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +21,7 @@ export class RegistroComponent implements OnInit {
   showReqError : boolean;
   showRegexpError : boolean;
 
-  constructor( private http: HttpClient, private router: Router, private modalService: NgbModal) { }
+  constructor( private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.name = '';
@@ -59,7 +57,9 @@ export class RegistroComponent implements OnInit {
           console.log(resp.success);
           if(resp.success==true){
             this.showSuccess = true;
-            open()
+            setTimeout(() => {
+              this.router.navigate(['login']);
+            }, 3000);
           }else{
             if(resp.message=="Username ya existe"){
               this.showAlreadyExists = true;
@@ -80,9 +80,9 @@ export class RegistroComponent implements OnInit {
     this.showAlreadyExists = false;
     this.showOtherError = false;
     this.showSuccess = false;
-    this.showSuccess = false;
     this.showPassError = false;
     this.showReqError = false;
+    this.showRegexpError = false;
   }
 
   valid(){
@@ -100,25 +100,5 @@ export class RegistroComponent implements OnInit {
       return false;
     }
     return true;
-  }
-
-  // @ts-ignore
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        setTimeout(() => {
-          this.router.navigate(['login']);
-        }, 3000);
-      },
-      (reason) => {
-        setTimeout(() => {
-          this.router.navigate(['login']);
-        }, 3000);
-      },
-    );
-  }
-
-  sendEmail() {
-
   }
 }
