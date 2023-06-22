@@ -14,10 +14,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'IncrowdAngular'`, () => {
+  it(`should have as title 'Incrowd'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('IncrowdAngular');
+    expect(app.title).toEqual('Incrowd');
   });
 
   /*it('should render title', () => {
