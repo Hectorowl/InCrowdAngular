@@ -11,13 +11,15 @@ import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
 import { InicioComponent } from './inicio/inicio.component';
+import { PrincipalComponent } from './principal/principal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistroComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,

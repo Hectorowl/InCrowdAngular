@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserdataService} from "../userdata.service";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   showModalError: boolean;
 
 
-  constructor( private http: HttpClient, private router: Router, private modalService: NgbModal ) { }
+  constructor( private http: HttpClient, private router: Router, private modalService: NgbModal, private us:UserdataService ) { }
 
   ngOnInit(): void {
     this.user = '';
@@ -45,8 +46,9 @@ export class LoginComponent implements OnInit {
         console.log(resp);
         if(resp.success==true){
           this.showSuccess = true;
+          this.us.updateLan(this.user)
           setTimeout(() => {
-            this.router.navigate(['inicio']);
+            this.router.navigate(['principal']);
           }, 1000);
         }else{
           if(resp.message=="ERROR: EL usuario no existe"){
