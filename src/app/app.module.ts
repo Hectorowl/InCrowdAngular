@@ -12,6 +12,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
 import { InicioComponent } from './inicio/inicio.component';
 import { PrincipalComponent } from './principal/principal.component';
+import {
+  NgbAccordion, NgbAccordionBody,
+  NgbAccordionButton, NgbAccordionCollapse,
+  NgbAccordionDirective,
+  NgbAccordionHeader,
+  NgbAccordionItem, NgbPagination
+} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,6 +35,14 @@ import { PrincipalComponent } from './principal/principal.component';
     RouterOutlet,
     HttpClientModule,
     NgOptimizedImage,
+    NgbAccordion,
+    NgbAccordionDirective,
+    NgbAccordionItem,
+    NgbAccordionHeader,
+    NgbAccordionButton,
+    NgbAccordionCollapse,
+    NgbAccordionBody,
+    NgbPagination,
 
   ],
   providers: [],
