@@ -19,6 +19,9 @@ import {
   NgbAccordionHeader,
   NgbAccordionItem, NgbPagination
 } from "@ng-bootstrap/ng-bootstrap";
+import { CreateEventoComponent } from './create-evento/create-evento.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import {
     RegistroComponent,
     LoginComponent,
     InicioComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    CreateEventoComponent,
+    PerfilComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
