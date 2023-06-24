@@ -1,4 +1,4 @@
-<p>principal works!</p>
+<app-header></app-header>
 <br>
 <br>
 
@@ -10,7 +10,14 @@
   </div>
 </div>
 
-
+<div class="row justify-content-center" >
+  <div class="col-md-auto">
+    <span style="color: dodgerblue">
+      <h3>Eventos recomendados</h3>
+    </span>
+  </div>
+</div>
+<br>
 
 <div ngbAccordion [animation]= "true" [closeOthers]="true">
   <div ngbAccordionItem *ngFor="let evento of listado" [collapsed]="true">
