@@ -9,33 +9,41 @@
       <span *ngIf="showNameError" style="color: crimson">
                <br> Ya existe otro evenco con el mismo nombre
           </span>
+      <span *ngIf="showReqErrorName" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
     </div>
     <div class="col-md-auto">
       <label class="input-group-label">Categoría <span style="color: crimson">*</span>
         <br>
         <input class="form-control" type="text" placeholder="Categoría" name="categoria" [(ngModel)]="categoria"  required></label>
+      <span *ngIf="showReqErrorCat" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
     </div>
   </div>
 
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
-      <label class="input-group-label">Descripción
+      <label class="input-group-label">Descripción <span style="color: crimson">*</span>
         <br>
-        <input class="form-control" type="text" placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion"></label>
+        <input class="form-control" type="text" placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion" required></label>
+      <span *ngIf="showReqErrorDes" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
     </div>
   </div>
 
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
-      <label class="input-group-label">Aforo
+      <label class="input-group-label">Aforo <span style="color: crimson">*</span>
         <br>
-        <input class="form-control" type="number" placeholder="Aforo" name="aforo" [(ngModel)]="aforo"></label>
+        <input class="form-control" type="number" placeholder="Aforo" name="aforo" [(ngModel)]="aforo" required></label>
+      <span *ngIf="showReqErrorAforo" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
     </div>
   </div>
-
-
-
-
 
   <div class="row justify-content-center" style="margin-top: 7%">
     <div class="col-md-auto">
@@ -50,6 +58,9 @@
           #d="ngbDatepicker"
         />
         <button class="btn btn-secondary bi bi-calendar3" style="justify-self: center" (click)="d.toggle()" type="button">Seleccionar Fecha</button>
+        <span *ngIf="showReqErrorFecha" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
       </label>
     </div>
 
@@ -59,6 +70,9 @@
           <br>
           <ngb-timepicker [(ngModel)]="hora" required></ngb-timepicker>
         </label>
+      <span *ngIf="showReqErrorHora" style="color: crimson">
+               <br> Campo obligatorio
+          </span>
     </div>
   </div>
 
