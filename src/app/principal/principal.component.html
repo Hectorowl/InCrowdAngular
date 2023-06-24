@@ -10,43 +10,46 @@
   </div>
 </div>
 
-<div ngbAccordion [closeOthers]="true">
+
+
+<div ngbAccordion [animation]= "true" [closeOthers]="true">
   <div ngbAccordionItem *ngFor="let evento of listado" [collapsed]="true">
-    <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>{{ evento.nombre }}</button>
+    <h2 ngbAccordionHeader style="text-align: center">
+      <button ngbAccordionButton  class="accordion-button d-block text-center" style="margin-right: auto">{{ evento.nombre }}</button>
     </h2>
     <div ngbAccordionCollapse>
       <div ngbAccordionBody>
         <ng-template>
           <div class="row" style="margin-left: 10%">
-            <div class="col-md-5" style=";text-align: right" >
-              <label class="input-group-label">Puesto :<span style="color: crimson">{{evento.descripcion}}</span>
+            <div class="col-md-10" style=";text-align: center" >
+              <label class="input-group-label">Descripción:<br><span style="color: crimson">{{evento.descripcion}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-10" style=";text-align: center" >
+              <label class="input-group-label">Organizador:<br><span style="color: crimson">{{evento.organizador}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-5" style="text-align: right">
+              <label class="input-group-label">Aforo:<span style="color: crimson">{{evento.aforo}}</span>
               </label>
             </div>
             <div class="col-md-5">
-              <label class="input-group-label">Convocante:<span style="color: crimson">{{evento.organizador}}</span>
+              <label class="input-group-label">Categoría:<span style="color: crimson">{{evento.categoria}}</span>
               </label>
             </div>
           </div>
 
           <div class="row" style="margin-left: 10%">
             <div class="col-md-5" style="text-align: right">
-              <label class="input-group-label">Plazas :<span style="color: crimson">{{evento.aforo}}</span>
+              <label class="input-group-label">Fecha:<span style="color: crimson">{{evento.fecha}}</span>
               </label>
             </div>
             <div class="col-md-5">
-              <label class="input-group-label">Tipo:<span style="color: crimson">{{evento.categoria}}</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="row" style="margin-left: 10%">
-            <div class="col-md-5" style="text-align: right">
-              <label class="input-group-label">Inicio plazo presentación :<span style="color: crimson">{{evento.fecha}}</span>
-              </label>
-            </div>
-            <div class="col-md-5">
-              <label class="input-group-label">Fin plazo presentación:<span style="color: crimson">{{evento.hora}}</span>
+              <label class="input-group-label">Hora:<span style="color: crimson">{{evento.hora}}</span>
               </label>
             </div>
           </div>
