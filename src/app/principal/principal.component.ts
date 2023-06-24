@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserdataService} from "../userdata.service";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Evento} from "../app.component";
 
 
@@ -21,13 +21,8 @@ export class PrincipalComponent implements OnInit{
   nores : boolean;
   page: number;
   pageSize: number;
-  extrafil = {
-    universidad: false,
-    ayuntamiento: false
-  }
-  locfil: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router,private us:UserdataService){
+  constructor(private http: HttpClient, private router: Router,private us:UserdataService){
     this.us.getLan().subscribe(us => this.user = us);
   }
 
@@ -62,6 +57,7 @@ export class PrincipalComponent implements OnInit{
           if(resp.length==0){this.nores=true;}
         },
         (error: HttpErrorResponse) => {
+          this.nores=true
           console.error(error);
         });
 
