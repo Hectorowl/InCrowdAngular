@@ -17,11 +17,12 @@ import {
   NgbAccordionButton, NgbAccordionCollapse,
   NgbAccordionDirective,
   NgbAccordionHeader,
-  NgbAccordionItem, NgbPagination
+  NgbAccordionItem, NgbDatepicker, NgbInputDatepicker, NgbPagination, NgbTimepicker
 } from "@ng-bootstrap/ng-bootstrap";
 import { CreateEventoComponent } from './create-evento/create-evento.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { HeaderComponent } from './header/header.component';
+import {LocalizeFn} from "@angular/localize/init"
 
 @NgModule({
   declarations: [
@@ -49,6 +50,9 @@ import { HeaderComponent } from './header/header.component';
     NgbAccordionCollapse,
     NgbAccordionBody,
     NgbPagination,
+    NgbTimepicker,
+    NgbDatepicker,
+    NgbInputDatepicker,
 
   ],
   providers: [],

@@ -1,3 +1,86 @@
 <app-header></app-header>
 
-<p>create-evento works!</p>
+<div class="container-fluid form-group" style="width: max-content">
+  <div class="row justify-content-center" style="margin-top: 20%">
+    <div class="col-md-auto">
+      <label class="input-group-label">Nombre <span style="color: crimson">*</span>
+        <br>
+        <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="nombre"  required></label>
+      <span *ngIf="showNameError" style="color: crimson">
+               <br> Ya existe otro evenco con el mismo nombre
+          </span>
+    </div>
+    <div class="col-md-auto">
+      <label class="input-group-label">Categoría <span style="color: crimson">*</span>
+        <br>
+        <input class="form-control" type="text" placeholder="Categoría" name="categoria" [(ngModel)]="categoria"  required></label>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+      <label class="input-group-label">Descripción
+        <br>
+        <input class="form-control" type="text" placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion"></label>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+      <label class="input-group-label">Aforo
+        <br>
+        <input class="form-control" type="number" placeholder="Aforo" name="aforo" [(ngModel)]="aforo"></label>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+      <label class="input-group-label">Fecha <span style="color: crimson">*</span>
+        <br><br>
+        <input style="margin-top: 6%"
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          [(ngModel)]="fecha"
+          ngbDatepicker
+          #d="ngbDatepicker"
+        />
+        <button class="btn btn-secondary bi bi-calendar3" style="justify-self: center" (click)="d.toggle()" type="button">Seleccionar Fecha</button>
+      </label>
+    </div>
+
+
+    <div class="col-md-auto">
+        <label class="input-group-label">Hora <span style="color: crimson">*</span>
+          <br>
+          <ngb-timepicker [(ngModel)]="hora" required></ngb-timepicker>
+        </label>
+    </div>
+  </div>
+
+
+
+  <div class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+      <button class="btn btn-secondary" type="submit" id="eventoBut" style="background-color: #2D074A" (click)="createEvento()"> Crear Evento </button>
+    </div>
+  </div>
+  <div *ngIf="showSuccess" class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+        <span style="color: green">
+          Evento creado con éxito.
+        </span>
+    </div>
+  </div>
+  <div *ngIf="showOtherError" class="row justify-content-center" style="margin-top: 7%">
+    <div class="col-md-auto">
+        <span style="color: crimson">
+          Error al crear evento.
+        </span>
+    </div>
+  </div>
+</div>
