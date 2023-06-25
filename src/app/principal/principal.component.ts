@@ -3,6 +3,7 @@ import {UserdataService} from "../userdata.service";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Evento} from "../app.component";
+import {EventdataService} from "../eventdata.service";
 
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
@@ -22,7 +23,7 @@ export class PrincipalComponent implements OnInit{
   page: number;
   pageSize: number;
 
-  constructor(private http: HttpClient, private router: Router,private us:UserdataService){
+  constructor(private http: HttpClient, private router: Router,private us:UserdataService,private es:EventdataService){
     this.us.getLan().subscribe(us => this.user = us);
   }
 
@@ -46,8 +47,6 @@ export class PrincipalComponent implements OnInit{
   }
 
   getListado() {
-    let array
-    array = [];
     this.nores=false;
       this.http.get('http://localhost:4200/api' + '/EventosRandom/'+this.user+'/').subscribe(
         (resp: any) => {
@@ -60,7 +59,11 @@ export class PrincipalComponent implements OnInit{
           this.nores=true
           console.error(error);
         });
+  }
 
-
+  toEvento(evento: Evento) {
+    console.log('Enter toEvento');
+    this.es.updateEsr(evento.nombre)
+    this.router.navigate(['evento']);
   }
 }

@@ -7,6 +7,7 @@ import {PrincipalComponent} from "./principal/principal.component";
 import {PerfilComponent} from "./perfil/perfil.component";
 import {CreateEventoComponent} from "./create-evento/create-evento.component";
 import {BusquedaComponent} from "./busqueda/busqueda.component";
+import {EventoComponent} from "./evento/evento.component";
 
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent},
   { path: 'eventoCreate', component: CreateEventoComponent},
   { path: 'busqueda', component: BusquedaComponent},
+  { path: 'evento', component: EventoComponent},
   { path: '**', component: InicioComponent },
 ];
 

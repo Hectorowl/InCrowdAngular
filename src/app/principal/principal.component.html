@@ -60,6 +60,11 @@
               </label>
             </div>
           </div>
+          <div class="row" style="margin-left: 10%;margin-top: 2%">
+            <div class="col-md-10" style=";text-align: center" >
+              <button  class="btn btn-secondary" style="background-color: #2D074A" id="editBut" (click)="toEvento(evento)">Ver detalle</button>
+            </div>
+          </div>
         </ng-template>
       </div>
     </div>
@@ -68,7 +73,7 @@
 
 <div class="row justify-content-center" style="margin-top: 2%">
   <div class="col-md-auto">
-  <ngb-pagination *ngIf="listado_len > 0"[collectionSize]="listado_len" [(page)]="page" [boundaryLinks]="true" style="margin-left: auto;margin-right: auto">
+  <ngb-pagination *ngIf="listado_len > 0" [collectionSize]="listado_len" [(page)]="page" [boundaryLinks]="true" style="margin-left: auto;margin-right: auto">
     <ng-template ngbPaginationPages let-page let-pages="pages">
       <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
         <div class="form-group d-flex flex-nowrap px-2">

@@ -32,7 +32,8 @@ import {
 import { CreateEventoComponent } from './create-evento/create-evento.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { HeaderComponent } from './header/header.component';
-import { BusquedaComponent } from './busqueda/busqueda.component'
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { EventoComponent } from './evento/evento.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component'
     CreateEventoComponent,
     PerfilComponent,
     HeaderComponent,
-    BusquedaComponent
+    BusquedaComponent,
+    EventoComponent
   ],
   imports: [
     BrowserModule,
