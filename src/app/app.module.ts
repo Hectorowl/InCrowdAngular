@@ -27,7 +27,7 @@ import {
   NgbNavItem,
   NgbNavLink, NgbNavOutlet,
   NgbPagination, NgbPaginationPages,
-  NgbTimepicker
+  NgbTimepicker, NgbTypeahead
 } from "@ng-bootstrap/ng-bootstrap";
 import { CreateEventoComponent } from './create-evento/create-evento.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -70,6 +70,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component'
     NgbNavContent,
     NgbPaginationPages,
     NgbNavOutlet,
+    NgbTypeahead,
 
   ],
   providers: [],

@@ -4,7 +4,6 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserdataService} from "../userdata.service";
 
-
 const FILTER_PAG_REGEX = /[^0-9]/g;
 
 @Component({
@@ -18,12 +17,15 @@ export class BusquedaComponent implements OnInit{
 
   listado : [Evento]
   listadoShow : [Evento]
-  listadoFilter : [Evento]
+  listadoNames : string[] = []
+  listadoFilter : Evento[] = []
+  listadoFilterNames : string[] = []
   listado_len : number;
   listadoShow_len : number;
   nores : boolean;
   page: number;
   pageSize: number;
+  typeahead: string;
 
   constructor(private http: HttpClient, private router: Router,private us:UserdataService){
     this.us.getLan().subscribe(us => this.user = us);
@@ -38,6 +40,8 @@ export class BusquedaComponent implements OnInit{
     this.listado_len=0;
     this.listadoShow_len=0;
     this.nores=false;
+    this.typeahead='';
+
     this.getListado();
   }
 
@@ -64,6 +68,14 @@ export class BusquedaComponent implements OnInit{
           this.listadoShow=this.listadoShow.filter(evento => evento.organizador != this.user)
           this.listadoShow_len = this.listadoShow.length;
           if(this.listadoShow_len==0){this.nores=true;}
+          else {
+            for (const event of this.listadoShow){
+              this.listadoNames.push(event.nombre)
+            }
+            console.log(this.listadoNames)
+            this.listadoFilter = this.listadoShow
+            this.listadoFilterNames = this.listadoNames
+          }
         }
       },
       (error: HttpErrorResponse) => {
@@ -71,4 +83,14 @@ export class BusquedaComponent implements OnInit{
         console.error(error);
       });
   }
+  filter(){
+    console.log(this.typeahead)
+    this.nores=false;
+    this.listadoFilter = this.listadoShow.filter(evento => evento.nombre.toLowerCase().indexOf(this.typeahead.toLowerCase()) >-1 )
+    this.listadoFilterNames = this.listadoNames.filter(evento => evento.toLowerCase().indexOf(this.typeahead.toLowerCase()) >-1 )
+    if(this.listadoFilter.length==0){this.nores=true}
+  }
+
 }
+
+

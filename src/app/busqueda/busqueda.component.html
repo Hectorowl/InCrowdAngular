@@ -5,10 +5,17 @@
 <div class="row justify-content-center" >
   <div class="col-md-auto">
     <span style="color: dodgerblue">
-      <h3>Eventos recomendados</h3>
+      <h3>Búsqueda Eventos</h3>
     </span>
   </div>
 </div>
+
+<div class="row justify-content-center" style="margin-top: 2%">
+  <div class="col-md-auto">
+    <input class="form-control" style="text-align: center" type="text" placeholder="" name="typeaheadcutre" [(ngModel)]="this.typeahead" (change)="filter()">
+  </div>
+</div>
+
 <br>
 
 <div *ngIf="nores" class="row justify-content-center" >
@@ -20,7 +27,7 @@
 </div>
 
 <div ngbAccordion [animation]= "true" [closeOthers]="true">
-  <div ngbAccordionItem *ngFor="let evento of listadoShow" [collapsed]="true">
+  <div ngbAccordionItem *ngFor="let evento of listadoFilter" [collapsed]="true">
     <h2 ngbAccordionHeader style="text-align: center">
       <button ngbAccordionButton  class="accordion-button d-block text-center" style="margin-right: auto">{{ evento.nombre }}</button>
     </h2>
