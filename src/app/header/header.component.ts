@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,8 +9,7 @@ import {Router} from "@angular/router";
 export class HeaderComponent {
 
   constructor(
-    private router : Router,
-    private http : HttpClient
+    private router : Router
   ) { }
 
 
@@ -34,7 +32,7 @@ export class HeaderComponent {
   }
 
   toSearch() {
-    this.router.navigate(['inicio']);
+    this.router.navigate(['busqueda']);
   }
 
 }

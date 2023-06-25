@@ -1,0 +1,100 @@
+<app-header></app-header>
+<br>
+<br>
+
+<div *ngIf="nores" class="row justify-content-center" >
+  <div class="col-md-auto">
+    <span style="color: crimson">
+      <br> No se han encontrado resultados
+    </span>
+  </div>
+</div>
+
+<div class="row justify-content-center" >
+  <div class="col-md-auto">
+    <span style="color: dodgerblue">
+      <h3>Eventos recomendados</h3>
+    </span>
+  </div>
+</div>
+<br>
+
+<div ngbAccordion [animation]= "true" [closeOthers]="true">
+  <div ngbAccordionItem *ngFor="let evento of listadoShow" [collapsed]="true">
+    <h2 ngbAccordionHeader style="text-align: center">
+      <button ngbAccordionButton  class="accordion-button d-block text-center" style="margin-right: auto">{{ evento.nombre }}</button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-10" style=";text-align: center" >
+              <label class="input-group-label">Descripción:<br><span style="color: crimson">{{evento.descripcion}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-10" style=";text-align: center" >
+              <label class="input-group-label">Organizador:<br><span style="color: crimson">{{evento.organizador}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-5" style="text-align: right">
+              <label class="input-group-label">Aforo:<span style="color: crimson">{{evento.aforo}}</span>
+              </label>
+            </div>
+            <div class="col-md-5">
+              <label class="input-group-label">Categoría:<span style="color: crimson">{{evento.categoria}}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row" style="margin-left: 10%">
+            <div class="col-md-5" style="text-align: right">
+              <label class="input-group-label">Fecha:<span style="color: crimson">{{evento.fecha}}</span>
+              </label>
+            </div>
+            <div class="col-md-5">
+              <label class="input-group-label">Hora:<span style="color: crimson">{{evento.hora}}</span>
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center" style="margin-top: 2%">
+  <div class="col-md-auto">
+    <ngb-pagination *ngIf="listadoShow_len > 0" [collectionSize]="listadoShow_len" [(page)]="page" [boundaryLinks]="true" style="margin-left: auto;margin-right: auto">
+      <ng-template ngbPaginationPages let-page let-pages="pages">
+        <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
+          <div class="form-group d-flex flex-nowrap px-2">
+            <label
+              id="paginationInputLabel"
+              for="paginationInput"
+              class="col-form-label mr-2 ml-1"
+            >Page</label>
+            <input #i
+                   type="text"
+                   inputmode="numeric"
+                   pattern="[0-9]*"
+                   class="form-control custom-pages-input"
+                   id="paginationInput"
+                   [value]="page"
+                   (keyup.enter)="selectPage(i.value)"
+                   (blur)="selectPage(i.value)"
+                   (input)="formatInput($any($event).target)"
+                   aria-labelledby="paginationInputLabel paginationDescription"
+                   style="width: 2.5rem"
+            />
+            <span id="paginationDescription" class="col-form-label text-nowrap px-2">
+                  of {{pages.length}}</span>
+          </div>
+        </li>
+      </ng-template>
+    </ngb-pagination>
+  </div>
+</div>

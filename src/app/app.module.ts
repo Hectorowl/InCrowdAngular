@@ -32,7 +32,7 @@ import {
 import { CreateEventoComponent } from './create-evento/create-evento.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { HeaderComponent } from './header/header.component';
-import {LocalizeFn} from "@angular/localize/init"
+import { BusquedaComponent } from './busqueda/busqueda.component'
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import {LocalizeFn} from "@angular/localize/init"
     PrincipalComponent,
     CreateEventoComponent,
     PerfilComponent,
-    HeaderComponent
+    HeaderComponent,
+    BusquedaComponent
   ],
   imports: [
     BrowserModule,
