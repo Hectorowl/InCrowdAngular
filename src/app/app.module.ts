@@ -13,11 +13,21 @@ import {NgOptimizedImage} from "@angular/common";
 import { InicioComponent } from './inicio/inicio.component';
 import { PrincipalComponent } from './principal/principal.component';
 import {
-  NgbAccordion, NgbAccordionBody,
-  NgbAccordionButton, NgbAccordionCollapse,
+  NgbAccordion,
+  NgbAccordionBody,
+  NgbAccordionButton,
+  NgbAccordionCollapse,
   NgbAccordionDirective,
   NgbAccordionHeader,
-  NgbAccordionItem, NgbDatepicker, NgbInputDatepicker, NgbPagination, NgbTimepicker
+  NgbAccordionItem,
+  NgbDatepicker,
+  NgbInputDatepicker,
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLink, NgbNavOutlet,
+  NgbPagination, NgbPaginationPages,
+  NgbTimepicker
 } from "@ng-bootstrap/ng-bootstrap";
 import { CreateEventoComponent } from './create-evento/create-evento.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -53,6 +63,12 @@ import {LocalizeFn} from "@angular/localize/init"
     NgbTimepicker,
     NgbDatepicker,
     NgbInputDatepicker,
+    NgbNav,
+    NgbNavItem,
+    NgbNavLink,
+    NgbNavContent,
+    NgbPaginationPages,
+    NgbNavOutlet,
 
   ],
   providers: [],
