@@ -239,4 +239,28 @@ export class PerfilComponent implements OnInit{
     }
     return ret
   }
+
+
+  // @ts-ignore
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+      },
+      (reason) => {
+      },
+    );
+  }
+
+  borrarEvento() {
+      this.http.delete('http://localhost:4200/api' + '/DeleteEvento/' + this.nombre + '/').subscribe(
+        (resp: any) => {
+          console.log('resp');
+          console.log(resp);
+          this.modalService.dismissAll()
+        },
+        (error: HttpErrorResponse) => {
+          this.modalService.dismissAll()
+          console.log(error)
+        });
+  }
 }
