@@ -51,7 +51,7 @@ export class BusquedaComponent implements OnInit{
 
   getListado() {
     this.nores=false;
-    this.http.get('http://localhost:4200/api' + '/eventosNoApuntados/'+this.user+'/').subscribe(
+    this.http.get('http://localhost:4200/api' + '/Eventos/').subscribe(
       (resp: any) => {
         console.log(resp);
         this.listado = resp;
