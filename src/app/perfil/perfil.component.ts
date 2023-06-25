@@ -36,6 +36,13 @@ export class PerfilComponent implements OnInit{
   categoria: string;
   organizador: string;
 
+  showReqErrorName: boolean = false;
+  showReqErrorCat: boolean = false;
+  showReqErrorDes: boolean = false;
+  showReqErrorAforo: boolean = false;
+  showReqErrorFecha: boolean = false;
+  showReqErrorHora: boolean = false;
+
 
 
   constructor(private http: HttpClient, private router: Router,private modalService: NgbModal,private us:UserdataService){
@@ -67,9 +74,32 @@ export class PerfilComponent implements OnInit{
     input.value = input.value.replace(FILTER_PAG_REGEX, '');
   }
 
-  getListados() {
+  cleanBusqueda(){
+    this.pageMine=1;
+    this.pageAp=1;
+    this.pageSize=10;
+    this.listadoAp_len=0;
+    this.listadoMine_len=0;
     this.noresMine=false;
     this.noresAp=false;
+  }
+
+  cleanModal(){
+    this.showReqErrorName = false;
+    this.showReqErrorCat = false;
+    this.showReqErrorDes = false;
+    this.showReqErrorAforo = false;
+    this.showReqErrorFecha = false;
+    this.showReqErrorHora = false;
+  }
+
+  cleanAll(){
+    this.cleanModal()
+    this.cleanBusqueda()
+  }
+
+  getListados() {
+    this.cleanAll()
 
     this.http.get('http://localhost:4200/api' + '/Eventos/'+this.user+'/').subscribe(
       (resp: any) => {
@@ -121,23 +151,9 @@ export class PerfilComponent implements OnInit{
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' ,size: "lg"}).result.then(
       (result) => {
-        this.pageMine=1;
-        this.pageAp=1;
-        this.pageSize=10;
-        this.listadoAp_len=0;
-        this.listadoMine_len=0;
-        this.noresMine=false;
-        this.noresAp=false;
         this.getListados();
       },
       (reason) => {
-        this.pageMine=1;
-        this.pageAp=1;
-        this.pageSize=10;
-        this.listadoAp_len=0;
-        this.listadoMine_len=0;
-        this.noresMine=false;
-        this.noresAp=false;
         this.getListados();
       },
     );
@@ -162,5 +178,65 @@ export class PerfilComponent implements OnInit{
     date.setHours(Number(parts[0]))
     date.setMinutes(Number(parts[1]))
     return date;
+  }
+
+  updateEvento() {
+    this.cleanModal();
+    if(this.valid()) {
+      const eventoData = {
+        nombre: this.nombre,
+        descripcion: this.descripcion,
+        fecha: this.fecha.day.toString() + '-' + this.fecha.month + '-' + this.fecha.year,
+        hora: this.hora.hour + ':' + this.hora.minute,
+        esPublico: this.esPublico,
+        aforo: this.aforo,
+        categoria: this.categoria,
+        organizador: this.organizador,
+      };
+
+      this.http.put('http://localhost:4200/api' + '/UpdateEvento/' + this.nombre + '/', eventoData).subscribe(
+        (resp: any) => {
+          console.log('resp');
+          console.log(resp);
+          if (resp.success == true) {
+            this.modalService.dismissAll()
+          } else {
+            this.modalService.dismissAll()
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.modalService.dismissAll()
+          console.log(error)
+        });
+    }
+  }
+
+  valid() {
+    var ret = true;
+    if (this.nombre == '') {
+      this.showReqErrorName = true;
+      ret = false;
+    }
+    if (this.categoria == '') {
+      this.showReqErrorCat = true;
+      ret = false;
+    }
+    if (this.descripcion == '') {
+      this.showReqErrorDes = true;
+      ret = false;
+    }
+    if (this.aforo == 0) {
+      this.showReqErrorAforo = true;
+      ret = false;
+    }
+    if (this.fecha.day == 0 && this.fecha.month == 0 && this.fecha.year == 0 ) {
+      this.showReqErrorFecha = true;
+      ret = false;
+    }
+    if (this.hora.hour == 0 && this.hora.minute == 0) {
+      this.showReqErrorHora = true;
+      ret = false;
+    }
+    return ret
   }
 }
