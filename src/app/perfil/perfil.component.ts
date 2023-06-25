@@ -56,8 +56,6 @@ export class PerfilComponent implements OnInit{
   }
 
   getListados() {
-    let array
-    array = [];
     this.noresMine=false;
     this.noresAp=false;
 
@@ -85,5 +83,9 @@ export class PerfilComponent implements OnInit{
       });
 
 
+  }
+
+  Edit(evento: Evento) {
+    console.log(evento)
   }
 }
