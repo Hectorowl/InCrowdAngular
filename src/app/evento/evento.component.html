@@ -40,8 +40,10 @@
 </div>
   </div>
 </div>
+
+
 <br>
-<div class="row" style="height:100%;">
+<div *ngIf="isParticipante" class="row" style="height:100%;">
   <div class="col-md-3">
   </div>
   <div class="col-md-6" style="background-color: whitesmoke;height: 100%" >
@@ -61,7 +63,7 @@
   </div>
 </div>
 
-<div class="row" style="height:100%;">
+<div *ngIf="isParticipante" class="row" style="height:100%;">
   <div class="col-md-4">
   </div>
   <div class="col-md-4" style="margin-top: 4%" >
@@ -78,5 +80,21 @@
   <div class="col-md-4" style="margin-top: 4%; float: left" >
     <button type="button" class="btn btn-primary" (click)="escribir()">Enviar</button>
     <br>
+  </div>
+</div>
+
+<div *ngIf="!isParticipante" class="row" style="height:100%">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4" style="margin-top: 4%" >
+    <div class="row justify-content-center" >
+      <div class="col-md-auto">
+        <span style="color: crimson">
+           Solo los participantes pueden ver el chat
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" style="margin-top: 4%; float: left" >
   </div>
 </div>
