@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserdataService} from "../userdata.service";
 import {EventdataService} from "../eventdata.service";
+import {Evento, Mensaje, Usuario} from "../app.component";
 
 @Component({
   selector: 'app-evento',
@@ -19,11 +20,114 @@ export class EventoComponent implements OnInit{
     this.es.getEsr().subscribe(es => this.evento = es);
   }
 
+  listadoMen : Mensaje[] = []
+  eventoData: Evento
+  listadoParticipantes: Usuario[] = []
+  isParticipante: boolean = false
+  showSendError: boolean;
+
+
+  mensaje: string
+
+
   ngOnInit(): void {
     this.user = 'hectoruser'
+    this.evento = 'Evento API'
+    this.isParticipante = false
+    this.showSendError= false;
+
+    this.mensaje = ''
+
     console.log(this.evento)
     console.log(this.user)
+    this.getMensajes()
+    this.getParticipantes()
+    this.getEvento()
+    this.getisParticipante()
+    console.log(this.listadoMen)
+    console.log(this.listadoParticipantes)
+    console.log(this.eventoData)
+
+  }
+
+  getMensajes() {
+    this.http.get('http://localhost:4200/api' + '/Mensajes/'+this.evento+'/').subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.listadoMen = resp;
+        console.log(this.listadoMen)
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+      });
+  }
+
+  getParticipantes() {
+    this.http.get('http://localhost:4200/api' + '/participantes/'+this.evento+'/').subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.listadoParticipantes = resp;
+        console.log(this.listadoParticipantes)
+
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+      });
+  }
+
+  getEvento() {
+    this.http.get('http://localhost:4200/api' + '/Evento/'+this.evento+'/').subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.eventoData = resp;
+        console.log(this.eventoData)
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+      });
+  }
+
+  getisParticipante() {
+    this.http.get('http://localhost:4200/api' + '/esParticipante/'+this.evento+'/'+this.user+'/').subscribe(
+      (resp: any) => {
+        console.log(resp);
+        if(resp.success){
+          this.isParticipante = resp.message == "TRUE";
+        }
+        console.log(this.isParticipante)
+      },
+      (error: HttpErrorResponse) => {
+        this.isParticipante = false
+        console.error(error);
+      });
   }
 
 
+  escribir() {
+    if(this.mensaje!='') {
+      const newMensaje = { // Objeto usuario en registro
+        autor: this.user,
+        evento: this.evento,
+        texto: this.mensaje,
+      };
+
+      this.http.post('http://localhost:4200/api' + '/CreateMensaje/', newMensaje).subscribe(
+        (resp: any) => { // comprobar estado: 201 recurso creado, 409 error por repetición de user
+          console.log(resp);
+          console.log(resp.success);
+          if(resp.success==true){
+            this.showSendError=false
+            this.getMensajes()
+          }else{
+            this.showSendError = true;
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          this.showSendError = true;
+          console.log(error)
+        });
+    }
+
+  }
 }

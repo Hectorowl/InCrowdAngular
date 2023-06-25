@@ -17,6 +17,7 @@ export class Usuario{
   valoracion: number;
   numEventosCreados: number;
   numEventosParticipa: number;
+  numValoraciones: number;
 }
 
 export class Evento{
@@ -31,6 +32,7 @@ export class Evento{
 }
 
 export class Mensaje{
+  id: number;
   autor: string;
   evento: string;
   texto: string;

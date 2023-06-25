@@ -1,1 +1,82 @@
-<p>evento works!</p>
+<app-header></app-header>
+
+<div class="row" >
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6" style="background-color: lightcyan" >
+
+  <div class="row" style="margin-left: 10%;">
+  <div class="col-md-10" style=";text-align: center" >
+    <label class="input-group-label">Descripción:<br><span style="color: crimson">{{eventoData.descripcion}}</span>
+    </label>
+  </div>
+</div>
+<div class="row" style="margin-left: 10%">
+  <div class="col-md-10" style=";text-align: center" >
+    <label class="input-group-label">Organizador:<br><span style="color: crimson">{{eventoData.organizador}}</span>
+    </label>
+  </div>
+</div>
+<div class="row" style="margin-left: 10%">
+  <div class="col-md-5" style="text-align: right">
+    <label class="input-group-label">Aforo:<span style="color: crimson">{{eventoData.aforo}}</span>
+    </label>
+  </div>
+  <div class="col-md-5">
+    <label class="input-group-label">Categoría:<span style="color: crimson">{{eventoData.categoria}}</span>
+    </label>
+  </div>
+</div>
+
+<div class="row" style="margin-left: 10%">
+  <div class="col-md-5" style="text-align: right">
+    <label class="input-group-label">Fecha:<span style="color: crimson">{{eventoData.fecha}}</span>
+    </label>
+  </div>
+  <div class="col-md-5">
+    <label class="input-group-label">Hora:<span style="color: crimson">{{eventoData.hora}}</span>
+    </label>
+  </div>
+</div>
+  </div>
+</div>
+<br>
+<div class="row" style="height:100%;">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6" style="background-color: whitesmoke;height: 100%" >
+    <div class="row" style="margin-top: 3%;margin-left: 2%" *ngFor="let msg of listadoMen">
+      <ngb-toast [autohide]="false" [animation]="true" [delay]="500" *ngIf="msg.autor==user" style="background-color: silver">
+        <span>{{msg.autor}} escribió: </span>
+        <hr>
+        <span>{{msg.texto}} </span>
+      </ngb-toast>
+      <ngb-toast [autohide]="false" [animation]="true" [delay]="500" *ngIf="msg.autor!=user" style="background-color: palegoldenrod">
+        <span>{{msg.autor}} escribió: </span>
+        <hr>
+        <span>{{msg.texto}} </span>
+      </ngb-toast>
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="height:100%;">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4" style="margin-top: 4%" >
+      <input class="form-control" style="text-align: center" type="text" placeholder="" name="typeaheadcutre" [(ngModel)]="this.mensaje">
+    <br>
+    <div *ngIf="showSendError" class="row justify-content-center" >
+      <div class="col-md-auto">
+        <span style="color: crimson">
+           Error al enviar mensaje
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" style="margin-top: 4%; float: left" >
+    <button type="button" class="btn btn-primary" (click)="escribir()">Enviar</button>
+    <br>
+  </div>
+</div>
