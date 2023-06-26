@@ -21,7 +21,7 @@ export class EventoComponent implements OnInit{
   }
 
   listadoMen : Mensaje[] = []
-  eventoData: Evento
+  eventoData: Evento = new Evento()
   listadoParticipantes: Usuario[] = []
   isParticipante: boolean = false
   showSendError: boolean;
@@ -49,9 +49,9 @@ export class EventoComponent implements OnInit{
       this.getParticipantes()
       this.getEvento()
       this.getisParticipante()
-      console.log(this.listadoMen)
-      console.log(this.listadoParticipantes)
-      console.log(this.eventoData)
+      //console.log(this.listadoMen)
+      //console.log(this.listadoParticipantes)
+      //console.log(this.eventoData)
 
     }else {this.router.navigate(['inicio']);}
   }
