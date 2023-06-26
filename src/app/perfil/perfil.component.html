@@ -67,7 +67,10 @@
                   </div>
                 </div>
                 <div class="row" style="margin-left: 10%;margin-top: 2%">
-                  <div class="col-md-10" style=";text-align: center" >
+                  <div class="col-md-5" style=";text-align: right" >
+                    <button  class="btn btn-secondary" style="background-color: #2D074A" id="detBut" (click)="toEvento(evento)">Ver detalle</button>
+                  </div>
+                  <div class="col-md-5" style=";text-align: left" >
                     <button  class="btn btn-secondary" style="background-color: green" id="editBut" (click)="edit(evento,content)">Editar</button>
                   </div>
                 </div>
@@ -173,6 +176,11 @@
                   <div class="col-md-5">
                     <label class="input-group-label">Hora:<span style="color: crimson">{{evento.hora}}</span>
                     </label>
+                  </div>
+                </div>
+                <div class="row" style="margin-left: 10%;margin-top: 2%">
+                  <div class="col-md-10" style=";text-align: center" >
+                    <button  class="btn btn-secondary" style="background-color: #2D074A" id="detSegBut" (click)="toEvento(evento)">Ver detalle</button>
                   </div>
                 </div>
               </ng-template>

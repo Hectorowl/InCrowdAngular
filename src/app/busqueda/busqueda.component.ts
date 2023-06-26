@@ -3,6 +3,7 @@ import {Evento} from "../app.component";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserdataService} from "../userdata.service";
+import {EventdataService} from "../eventdata.service";
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
 
@@ -27,7 +28,7 @@ export class BusquedaComponent implements OnInit{
   pageSize: number;
   typeahead: string;
 
-  constructor(private http: HttpClient, private router: Router,private us:UserdataService){
+  constructor(private http: HttpClient, private router: Router,private us:UserdataService,private es:EventdataService){
     this.us.getLan().subscribe(us => this.user = us);
   }
 
@@ -92,6 +93,12 @@ export class BusquedaComponent implements OnInit{
     this.listadoFilter = this.listadoShow.filter(evento => evento.nombre.toLowerCase().indexOf(this.typeahead.toLowerCase()) >-1 )
     this.listadoFilterNames = this.listadoNames.filter(evento => evento.toLowerCase().indexOf(this.typeahead.toLowerCase()) >-1 )
     if(this.listadoFilter.length==0){this.nores=true}
+  }
+
+  toEvento(evento: Evento) {
+    console.log('Enter toEvento');
+    this.es.updateEsr(evento.nombre)
+    this.router.navigate(['evento']);
   }
 
 }

@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserdataService} from "../userdata.service";
 import {NgbDateStruct, NgbModal, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
+import {EventdataService} from "../eventdata.service";
 
 
 const FILTER_PAG_REGEX = /[^0-9]/g;
@@ -45,7 +46,7 @@ export class PerfilComponent implements OnInit{
 
 
 
-  constructor(private http: HttpClient, private router: Router,private modalService: NgbModal,private us:UserdataService){
+  constructor(private http: HttpClient, private router: Router,private modalService: NgbModal,private us:UserdataService,private es:EventdataService){
     this.us.getLan().subscribe(us => this.user = us);
   }
 
@@ -263,5 +264,11 @@ export class PerfilComponent implements OnInit{
           this.modalService.dismissAll()
           console.log(error)
         });
+  }
+
+  toEvento(evento: Evento) {
+    console.log('Enter toEvento');
+    this.es.updateEsr(evento.nombre)
+    this.router.navigate(['evento']);
   }
 }
