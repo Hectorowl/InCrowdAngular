@@ -13,4 +13,21 @@ describe('EventdataService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('EventDataService should return value from observable',
+    (done: DoneFn) => {
+      service.getEsr().subscribe(value => {
+        expect(value).toBe('');
+        done();
+      });
+    });
+
+  it('EventDataService should return value from observable after updated',
+    (done: DoneFn) => {
+      service.updateEsr('Evento API')
+      service.getEsr().subscribe(value => {
+        expect(value).toBe('Evento API');
+        done();
+      });
+    });
 });
