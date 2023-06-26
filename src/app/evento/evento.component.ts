@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {UserdataService} from "../userdata.service";
 import {EventdataService} from "../eventdata.service";
 import {Evento, Mensaje, Usuario} from "../app.component";
@@ -15,7 +15,7 @@ export class EventoComponent implements OnInit{
 
   user : string;
   evento : string;
-  constructor(private http: HttpClient, private router: Router,private modalService: NgbModal,private us:UserdataService, private es:EventdataService){
+  constructor(private http: HttpClient, private router: Router,private modalService: NgbModal,private us:UserdataService, private es:EventdataService, private offcanvasService: NgbOffcanvas){
     this.us.getLan().subscribe(us => this.user = us);
     this.es.getEsr().subscribe(es => this.evento = es);
   }
@@ -25,16 +25,22 @@ export class EventoComponent implements OnInit{
   listadoParticipantes: Usuario[] = []
   isParticipante: boolean = false
   showSendError: boolean;
+  showSusError: boolean;
+  showDesError: boolean;
+
+
 
 
   mensaje: string
 
 
   ngOnInit(): void {
-    this.user = 'hectoruser'
+    this.user = 'userPerez'
     this.evento = 'Evento API'
     this.isParticipante = false
     this.showSendError= false;
+    this.showSusError=false;
+    this.showDesError=false;
 
     this.mensaje = ''
 
@@ -128,6 +134,46 @@ export class EventoComponent implements OnInit{
           console.log(error)
         });
     }
+  }
+  openCanvas(content: TemplateRef<any>) {
+    this.offcanvasService.open(content, { backdropClass: 'bg-info' });
+  }
 
+  suscribir() {
+      this.http.get('http://localhost:4200/api' + '/anadirParticipante/'+this.evento+'/'+this.user+'/').subscribe(
+        (resp: any) => { // comprobar estado: 201 recurso creado, 409 error por repetición de user
+          console.log(resp);
+          console.log(resp.success);
+          if(resp.success==true){
+            this.showSusError=false
+            this.isParticipante=true
+            this.getParticipantes()
+          }else{
+            this.showSusError = true;
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.showSusError = true;
+          console.log(error)
+        });
+    }
+
+  desuscribir() {
+    this.http.get('http://localhost:4200/api' + '/deleteParticipante/'+this.evento+'/'+this.user+'/').subscribe(
+      (resp: any) => { // comprobar estado: 201 recurso creado, 409 error por repetición de user
+        console.log(resp);
+        console.log(resp.success);
+        if(resp.success==true){
+          this.showDesError=false
+          this.isParticipante=false
+          this.getParticipantes()
+        }else{
+          this.showDesError = true;
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.showDesError = true;
+        console.log(error)
+      });
   }
 }

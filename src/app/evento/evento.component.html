@@ -5,39 +5,67 @@
   </div>
   <div class="col-md-6" style="background-color: lightcyan" >
 
-  <div class="row" style="margin-left: 10%;">
-  <div class="col-md-10" style=";text-align: center" >
-    <label class="input-group-label">Descripción:<br><span style="color: crimson">{{eventoData.descripcion}}</span>
-    </label>
-  </div>
-</div>
-<div class="row" style="margin-left: 10%">
-  <div class="col-md-10" style=";text-align: center" >
-    <label class="input-group-label">Organizador:<br><span style="color: crimson">{{eventoData.organizador}}</span>
-    </label>
-  </div>
-</div>
-<div class="row" style="margin-left: 10%">
-  <div class="col-md-5" style="text-align: right">
-    <label class="input-group-label">Aforo:<span style="color: crimson">{{eventoData.aforo}}</span>
-    </label>
-  </div>
-  <div class="col-md-5">
-    <label class="input-group-label">Categoría:<span style="color: crimson">{{eventoData.categoria}}</span>
-    </label>
-  </div>
-</div>
+    <div class="row" style="margin-left: 10%;">
+      <div class="col-md-10" style=";text-align: center" >
+        <label class="input-group-label">Descripción:<br><span style="color: crimson">{{eventoData.descripcion}}</span>
+        </label>
+      </div>
+    </div>
+    <div class="row" style="margin-left: 10%">
+      <div class="col-md-10" style=";text-align: center" >
+        <label class="input-group-label">Organizador:<br><span style="color: crimson">{{eventoData.organizador}}</span>
+        </label>
+      </div>
+    </div>
+    <div class="row" style="margin-left: 10%">
+      <div class="col-md-5" style="text-align: right">
+        <label class="input-group-label">Aforo:<span style="color: crimson">{{eventoData.aforo}}</span>
+        </label>
+      </div>
+      <div class="col-md-5">
+        <label class="input-group-label">Categoría:<span style="color: crimson">{{eventoData.categoria}}</span>
+        </label>
+      </div>
+    </div>
 
-<div class="row" style="margin-left: 10%">
-  <div class="col-md-5" style="text-align: right">
-    <label class="input-group-label">Fecha:<span style="color: crimson">{{eventoData.fecha}}</span>
-    </label>
-  </div>
-  <div class="col-md-5">
-    <label class="input-group-label">Hora:<span style="color: crimson">{{eventoData.hora}}</span>
-    </label>
-  </div>
-</div>
+    <div class="row" style="margin-left: 10%">
+      <div class="col-md-5" style="text-align: right">
+        <label class="input-group-label">Fecha:<span style="color: crimson">{{eventoData.fecha}}</span>
+        </label>
+      </div>
+      <div class="col-md-5">
+        <label class="input-group-label">Hora:<span style="color: crimson">{{eventoData.hora}}</span>
+        </label>
+      </div>
+    </div>
+    <div *ngIf="isParticipante" class="row" style="margin-left: 10%;margin-top: 2%">
+      <div class="col-md-5" style=";text-align: right" >
+        <button  class="btn btn-secondary" style="background-color: #2D074A" id="parBut" (click)="openCanvas(content)">Ver Participantes</button>
+      </div>
+      <div class="col-md-5">
+        <button  class="btn btn-danger"  id="salBut" (click)="desuscribir()">Dejar de seguir</button>
+      </div>
+    </div>
+    <div *ngIf="!isParticipante" class="row" style="margin-left: 10%;margin-top: 2%">
+      <div class="col-md-10" style=";text-align: center" >
+        <button  class="btn btn-secondary" style="background-color: #2D074A" id="segBut" (click)="suscribir()">Seguir evento</button>
+      </div>
+    </div>
+    <div *ngIf="showSusError" class="row" style="margin-left: 10%;margin-top: 2%" >
+      <div class="col-md-10" style=";text-align: center" >
+        <span style="color: crimson">
+           Error al suscribirse
+        </span>
+      </div>
+    </div>
+    <div *ngIf="showDesError" class="row" style="margin-left: 10%;margin-top: 2%"  >
+      <div class="col-md-10" style=";text-align: center">
+        <span style="color: crimson">
+           Error al dejar de seguir
+        </span>
+      </div>
+    </div>
+    <br>
   </div>
 </div>
 
@@ -60,6 +88,7 @@
       </ngb-toast>
       <br>
     </div>
+    <br>
   </div>
 </div>
 
@@ -98,3 +127,21 @@
   <div class="col-md-4" style="margin-top: 4%; float: left" >
   </div>
 </div>
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">Participantes</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="row">
+      <div class="col-md-auto">
+        <div class="row" style="margin-top: 3%;margin-left: 1%" *ngFor="let participante of listadoParticipantes">
+          <ngb-toast [autohide]="false" [animation]="true" [delay]="500">
+            <span>{{participante.username}} </span>
+          </ngb-toast>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
