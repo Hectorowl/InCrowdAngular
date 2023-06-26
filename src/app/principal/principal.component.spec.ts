@@ -13,12 +13,19 @@ import {
   NgbAccordionHeader,
   NgbAccordionItem, NgbPagination
 } from "@ng-bootstrap/ng-bootstrap";
+import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
+import {BusquedaComponent} from "../busqueda/busqueda.component";
 
 describe('PrincipalComponent', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let component: PrincipalComponent;
   let fixture: ComponentFixture<PrincipalComponent>;
+  let router: Router;
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate')
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -26,18 +33,28 @@ describe('PrincipalComponent', () => {
         NgbAccordionButton, NgbAccordionCollapse,
         NgbAccordionDirective,
         NgbAccordionHeader,
-        NgbAccordionItem, NgbPagination],
-      declarations: [PrincipalComponent,HeaderComponent]
+        NgbAccordionItem, NgbPagination,RouterTestingModule.withRoutes([])],
+      declarations: [PrincipalComponent,HeaderComponent],
+      providers: [{provide: Router, useValue: mockRouter}]
+
     });
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(PrincipalComponent);
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
+    component.user='hectoruser'
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('must be logged', () => {
+    let fixture = TestBed.createComponent(PrincipalComponent);
+    fixture.detectChanges();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['inicio']);
   });
 
   it('should show results when there are events', () => {
@@ -85,5 +102,24 @@ describe('PrincipalComponent', () => {
     expect(component.listado_len).toBe(0)
     expect(component.nores).toBe(true)
   });
+
+  it('ver detalle must go to evento', () => {
+    let fixture = TestBed.createComponent(PrincipalComponent);
+    fixture.detectChanges();
+    let component: PrincipalComponent = fixture.componentInstance;
+    const response2 = {
+      nombre: "Ento api 2",
+      descripcion: "22",
+      fecha: "22-12-2023",
+      hora: "22:22",
+      esPublico: false,
+      aforo: 22,
+      categoria: "22",
+      organizador: "usertest"
+    }
+    component.toEvento(response2)
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['evento']);
+  });
+
 
 });
