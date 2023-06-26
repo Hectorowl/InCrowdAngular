@@ -28,14 +28,15 @@ export class PrincipalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.user = 'hectoruser'
-    console.log(this.us)
-    console.log(this.user)
-    this.page=1;
-    this.pageSize=10;
-    this.listado_len=0;
-    this.nores=false;
-    this.getListado();
+    if(this.user!='') {
+      console.log(this.us)
+      console.log(this.user)
+      this.page = 1;
+      this.pageSize = 10;
+      this.listado_len = 0;
+      this.nores = false;
+      this.getListado();
+    }else{this.router.navigate(['inicio']);}
   }
 
   selectPage(page: string) {

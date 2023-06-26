@@ -32,17 +32,20 @@ export class BusquedaComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.user = 'hectoruser'
-    console.log(this.us)
-    console.log(this.user)
-    this.page=1;
-    this.pageSize=10;
-    this.listado_len=0;
-    this.listadoShow_len=0;
-    this.nores=false;
-    this.typeahead='';
+    if(this.user!='') {
+      console.log(this.us)
+      console.log(this.user)
+      this.page = 1;
+      this.pageSize = 10;
+      this.listado_len = 0;
+      this.listadoShow_len = 0;
+      this.nores = false;
+      this.typeahead = '';
 
-    this.getListado();
+      this.getListado();
+    }else{
+      this.router.navigate(['inicio']);
+    }
   }
 
   selectPage(page: string) {

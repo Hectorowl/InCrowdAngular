@@ -35,25 +35,25 @@ export class EventoComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.user = 'userPerez'
-    this.evento = 'Evento API'
-    this.isParticipante = false
-    this.showSendError= false;
-    this.showSusError=false;
-    this.showDesError=false;
+    if(this.user!='' && this.evento!='') {
+      this.isParticipante = false
+      this.showSendError = false;
+      this.showSusError = false;
+      this.showDesError = false;
 
-    this.mensaje = ''
+      this.mensaje = ''
 
-    console.log(this.evento)
-    console.log(this.user)
-    this.getMensajes()
-    this.getParticipantes()
-    this.getEvento()
-    this.getisParticipante()
-    console.log(this.listadoMen)
-    console.log(this.listadoParticipantes)
-    console.log(this.eventoData)
+      console.log(this.evento)
+      console.log(this.user)
+      this.getMensajes()
+      this.getParticipantes()
+      this.getEvento()
+      this.getisParticipante()
+      console.log(this.listadoMen)
+      console.log(this.listadoParticipantes)
+      console.log(this.eventoData)
 
+    }else {this.router.navigate(['inicio']);}
   }
 
   getMensajes() {

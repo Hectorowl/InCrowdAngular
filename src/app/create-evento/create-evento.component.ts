@@ -41,26 +41,28 @@ export class CreateEventoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = 'hectoruser';
+    if(this.user!='') {
+      this.nombre = '';
+      this.descripcion = '';
+      this.fecha = {
+        day: 0,
+        month: 0,
+        year: 0
+      };
+      this.hora = {
+        hour: 0,
+        minute: 0,
+        second: 0
+      };
+      this.esPublico = false;
+      this.aforo = 0;
+      this.categoria = '';
+      this.organizador = this.user;
 
-    this.nombre = '';
-    this.descripcion = '';
-    this.fecha = {
-      day: 0,
-      month: 0,
-      year: 0
-    };
-    this.hora = {
-      hour: 0,
-      minute: 0,
-      second: 0
-    };
-    this.esPublico = false;
-    this.aforo = 0;
-    this.categoria = '';
-    this.organizador = this.user;
-
-    this.clean();
+      this.clean();
+    }else {
+      this.router.navigate(['inicio']);
+    }
 
   }
 
@@ -99,7 +101,6 @@ export class CreateEventoComponent implements OnInit {
   createEvento() {
     this.clean();
     if (this.valid()) {
-
       console.log(this.fecha)
       const eventoData = {
         nombre: this.nombre,

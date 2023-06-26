@@ -50,17 +50,18 @@ export class PerfilComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.user = 'hectoruser'
-    console.log(this.us)
-    console.log(this.user)
-    this.pageMine=1;
-    this.pageAp=1;
-    this.pageSize=10;
-    this.listadoAp_len=0;
-    this.listadoMine_len=0;
-    this.noresMine=false;
-    this.noresAp=false;
-    this.getListados();
+    if(this.user!='') {
+      console.log(this.us)
+      console.log(this.user)
+      this.pageMine = 1;
+      this.pageAp = 1;
+      this.pageSize = 10;
+      this.listadoAp_len = 0;
+      this.listadoMine_len = 0;
+      this.noresMine = false;
+      this.noresAp = false;
+      this.getListados();
+    }else{this.router.navigate(['inicio']);}
   }
 
   selectPageMine(page: string) {

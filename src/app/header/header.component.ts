@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {UserdataService} from "../userdata.service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 export class HeaderComponent {
 
   constructor(
-    private router : Router
+    private router : Router,private us:UserdataService
   ) { }
 
 
@@ -24,6 +25,7 @@ export class HeaderComponent {
   }
 
   toLogout() {
+    this.us.updateLan('')
       this.router.navigate(['inicio']);
   }
 
