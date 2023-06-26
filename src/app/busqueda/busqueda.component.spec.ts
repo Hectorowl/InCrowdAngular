@@ -169,7 +169,7 @@ describe('BusquedaComponent', () => {
     expect(component.nores=false)
   });
 
-  it('must go to evento', () => {
+  it('ver detalle must go to evento', () => {
     let fixture = TestBed.createComponent(BusquedaComponent);
     fixture.detectChanges();
     let component: BusquedaComponent = fixture.componentInstance;
